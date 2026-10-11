@@ -1,0 +1,29 @@
+.site-modal { position: fixed; width: min(1100px, calc(100% - 32px)); max-width: none; max-height: min(92dvh, 1000px); padding: 0; overflow: auto; border: 1px solid var(--color-border-strong); border-radius: 18px; background: var(--color-surface); color: var(--color-white); box-shadow: 0 24px 100px rgba(0,0,0,.38); }
+.site-modal::backdrop { background: rgba(5,5,9,.78); backdrop-filter: blur(7px); }
+.site-modal[open] { animation: modal-enter 180ms ease-out; }
+@keyframes modal-enter { from { opacity: 0; transform: translateY(8px) scale(.99); } to { opacity: 1; transform: translateY(0) scale(1); } }
+.modal-shell { position: relative; }
+.modal-close { position: absolute; z-index: 3; top: 13px; right: 13px; display: grid; width: 36px; height: 36px; place-items: center; border: 1px solid rgba(255,255,255,.16); border-radius: 50%; background: rgba(15,15,18,.75); color: white; cursor: pointer; font-size: 23px; line-height: 1; backdrop-filter: blur(10px); transition: background var(--transition), transform var(--transition); }
+.modal-close:hover { transform: rotate(90deg); background: rgba(124,58,237,.65); }
+.modal-media { min-height: 220px; overflow: hidden; border-bottom: 1px solid var(--color-border); background: #101016; }
+.modal-media .project-art { aspect-ratio: 1.72; }
+.modal-media img, .modal-media video, .modal-media iframe { width: 100%; max-height: 55dvh; aspect-ratio: 16 / 9; object-fit: contain; background: #09090d; }
+.modal-gallery { position: relative; }
+.modal-gallery img { width: 100%; max-height: 55dvh; object-fit: contain; }
+.gallery-controls { position: absolute; inset: 50% 14px auto; display: flex; justify-content: space-between; transform: translateY(-50%); pointer-events: none; }
+.gallery-controls button { display: grid; width: 38px; height: 38px; place-items: center; border: 1px solid rgba(255,255,255,.24); border-radius: 50%; background: rgba(15,15,18,.74); color: #fff; cursor: pointer; pointer-events: auto; }
+.gallery-count { position: absolute; right: 14px; bottom: 12px; padding: 3px 8px; border-radius: 20px; background: rgba(15,15,18,.72); color: #fff; font-size: 10px; }
+.modal-copy { padding: 26px 30px 31px; }
+.modal-copy .eyebrow { margin-bottom: 8px; }
+.modal-copy h2 { margin: 0; font-family: var(--font-heading); font-size: 27px; letter-spacing: -.04em; }
+.modal-copy > #modal-description { margin: 10px 0 0; color: var(--color-muted); font-size: 13px; }
+.modal-project-link { min-height: 42px; margin-top: 20px; padding-inline: 15px; font-size: 11px; }
+.cv-modal { width: min(900px, calc(100% - 32px)); }
+.cv-shell { padding: 0 26px 24px; }
+.cv-preview { display: block; width: 100%; height: min(65dvh, 720px); margin: 0 auto 18px; border: 0; background: #fff; }
+.cv-shell > .modal-close { position: sticky; top: 12px; float: right; margin-bottom: -36px; }
+.cv-print-action { display: flex; justify-content: flex-end; padding-top: 16px; border-top: 1px solid var(--color-border); }
+.cv-print-action .button { min-height: 43px; font-size: 11px; }
+[data-theme="light"] .site-modal { border-color: var(--color-border-strong); }
+[data-theme="light"] .modal-media { background: #e2e8f0; }
+[data-theme="light"] .modal-close { border-color: rgba(15,23,42,.16); background: rgba(255,255,255,.9); color: #0f172a; }
