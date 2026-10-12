@@ -4,9 +4,6 @@
 @media (max-width: 1000px) {
   :root { --header-height: 74px; }
   .nav-links { gap: 18px; }
-  .hero-content { gap: 25px; }
-  .hero h1 { font-size: clamp(3.5rem, 7vw, 5.6rem); }
-  .hero-visual { min-height: 400px; }
   .about-grid { gap: 55px; }
   .service-grid { grid-template-columns: repeat(2, 1fr); }
   .service-card { min-height: 250px; }
@@ -25,18 +22,9 @@
   .theme-toggle { align-self: flex-start; margin: 12px 0 0; }
   .nav-links > a { padding: 12px 4px; border-bottom: 1px solid rgba(255,255,255,.055); font-size: 12px; }
   .nav-links .nav-contact { justify-content: center; margin: 12px 0 0; padding: 11px 14px; border: 1px solid rgba(167,139,250,.3); }
-  [data-theme="light"] .nav-links { background: rgba(248,250,252,.98); }
-  [data-theme="light"] .nav-links > a { border-bottom-color: var(--color-border); }
+  :is([data-theme="light"], body.light-theme) .nav-links { background: rgba(248,250,252,.98); }
+  :is([data-theme="light"], body.light-theme) .nav-links > a { border-bottom-color: var(--color-border); }
   .hero { min-height: auto; padding-block: 76px 72px; }
-  .hero-content { grid-template-columns: 1fr; gap: 28px; }
-  .hero-copy { padding: 0; }
-  .hero h1 { font-size: clamp(3.9rem, 11vw, 6rem); }
-  .hero-visual { min-height: 430px; }
-  .portrait-card { width: min(310px, 67%); }
-  .floating-label-top { right: 6%; }
-  .floating-label-bottom { left: 7%; }
-  .hero-index { right: 8%; }
-  .scroll-cue { display: none; }
   .about-grid, .experience-grid { grid-template-columns: 1fr; gap: 25px; }
   .about-copy { padding-top: 0; }
   .stat-grid { margin-top: 40px; }
@@ -51,19 +39,6 @@
   .section { padding-block: 72px; }
   .brand-name { font-size: 9px; }
   .hero { padding-top: 60px; }
-  .hero-copy .eyebrow { flex-wrap: wrap; font-size: 9px; }
-  .hero h1 { font-size: clamp(3.45rem, 14vw, 4.8rem); }
-  .hero-role-line { font-size: 12px; }
-  .hero-description { margin-block: 20px 23px; font-size: 13px; }
-  .hero-actions { align-items: stretch; }
-  .hero-actions .button { min-height: 47px; padding-inline: 13px; font-size: 11px; }
-  .hero-specialties { gap: 6px; margin-top: 23px; }
-  .hero-specialties span { padding: 5px 8px; font-size: 9px; }
-  .hero-visual { min-height: 355px; }
-  .portrait-card { width: min(265px, 67%); }
-  .floating-label { gap: 7px; padding: 8px 10px; font-size: 8px; }
-  .floating-label-top { right: 0; }
-  .floating-label-bottom { left: 0; }
   .section h2 { font-size: clamp(2.15rem, 9vw, 2.8rem); }
   .lead-copy { font-size: 17px !important; }
   .stat-grid { grid-template-columns: 1fr; gap: 10px; margin-top: 33px; }
@@ -91,5 +66,9 @@
   .site-modal { width: calc(100% - 20px); }
   .modal-media { min-height: 155px; }
   .modal-copy { padding: 21px 20px 24px; }
-  .cv-shell { padding: 31px 23px 22px; }
+}
+
+@media (max-width: 520px) {
+  .hero-image-wrapper { height: clamp(300px, 90vw, 380px); }
+  .hero-profile-img { width: min(82%, 330px); }
 }

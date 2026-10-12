@@ -1,8 +1,7 @@
 (() => {
   const portfolioModal = document.querySelector("#portfolio-modal");
-  const cvModal = document.querySelector("#cv-modal");
 
-  if (!(portfolioModal instanceof HTMLDialogElement) || !(cvModal instanceof HTMLDialogElement)) return;
+  if (!(portfolioModal instanceof HTMLDialogElement)) return;
 
   const modalMedia = portfolioModal.querySelector("#modal-media");
   const modalTitle = portfolioModal.querySelector("#modal-title");
@@ -104,10 +103,6 @@
 
       portfolioModal.showModal();
     });
-  });
-
-  document.querySelectorAll("[data-open-cv]").forEach((button) => {
-    button.addEventListener("click", () => cvModal.showModal());
   });
 
   document.querySelectorAll(".site-modal").forEach((dialog) => {

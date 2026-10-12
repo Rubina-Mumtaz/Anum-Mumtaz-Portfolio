@@ -18,12 +18,6 @@
 .modal-copy h2 { margin: 0; font-family: var(--font-heading); font-size: 27px; letter-spacing: -.04em; }
 .modal-copy > #modal-description { margin: 10px 0 0; color: var(--color-muted); font-size: 13px; }
 .modal-project-link { min-height: 42px; margin-top: 20px; padding-inline: 15px; font-size: 11px; }
-.cv-modal { width: min(900px, calc(100% - 32px)); }
-.cv-shell { padding: 0 26px 24px; }
-.cv-preview { display: block; width: 100%; height: min(65dvh, 720px); margin: 0 auto 18px; border: 0; background: #fff; }
-.cv-shell > .modal-close { position: sticky; top: 12px; float: right; margin-bottom: -36px; }
-.cv-print-action { display: flex; justify-content: flex-end; padding-top: 16px; border-top: 1px solid var(--color-border); }
-.cv-print-action .button { min-height: 43px; font-size: 11px; }
-[data-theme="light"] .site-modal { border-color: var(--color-border-strong); }
-[data-theme="light"] .modal-media { background: #e2e8f0; }
-[data-theme="light"] .modal-close { border-color: rgba(15,23,42,.16); background: rgba(255,255,255,.9); color: #0f172a; }
+:is([data-theme="light"], body.light-theme) .site-modal { border-color: var(--color-border-strong); }
+:is([data-theme="light"], body.light-theme) .modal-media { background: #e2e8f0; }
+:is([data-theme="light"], body.light-theme) .modal-close { border-color: rgba(15,23,42,.16); background: rgba(255,255,255,.9); color: #0f172a; }

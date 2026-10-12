@@ -6,14 +6,33 @@
   <meta name="theme-color" content="#0f0f12">
   <meta name="description" content="Anum Mumtaz is a multidisciplinary creative and CEO of Stellax Agency, working across graphic design, 2D animation, character art, and video content.">
   <title>Anum Mumtaz — CEO at Stellax Agency &amp; Multidisciplinary Creative</title>
+
+  <script>
+    if ("scrollRestoration" in history) {
+      history.scrollRestoration = "manual";
+    }
+
+    window.addEventListener("DOMContentLoaded", () => {
+      if (!window.location.hash) {
+        window.scrollTo(0, 0);
+      }
+    });
+  </script>
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/navbar.css">
   <link rel="stylesheet" href="css/portfolio.css">
   <link rel="stylesheet" href="css/modal.css">
   <link rel="stylesheet" href="css/responsive.css">
+
+  <!-- EmailJS CDN (neon-config.js se PEHLE hona zaruri hai) -->
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+
+  <!-- JS Modules -->
   <script type="module" src="js/neon-config.js"></script>
   <script defer src="js/portfolio-filter.js"></script>
   <script defer src="js/modal.js"></script>
@@ -24,7 +43,7 @@
   <header class="site-header" id="top">
     <nav class="navbar container" aria-label="Main navigation">
       <a class="brand" href="#top" aria-label="Anum Mumtaz home">
-        <span class="brand-mark">A<span>.</span></span>
+        <span class="brand-mark">A<span></span></span>
         <span class="brand-name">ANUM MUMTAZ<span>CEO · STELLAX AGENCY</span></span>
       </a>
       <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-navigation" aria-label="Open navigation menu">
@@ -46,39 +65,19 @@
   </header>
 
   <main id="main">
-    <section class="hero section-shell" aria-labelledby="hero-title">
-      <div class="hero-glow hero-glow-one" aria-hidden="true"></div>
-      <div class="hero-glow hero-glow-two" aria-hidden="true"></div>
-      <div class="hero-content container">
-        <div class="hero-copy reveal">
-          <p class="eyebrow"><span class="status-dot"></span> CEO at Stellax Agency <span class="eyebrow-divider">·</span> Multidisciplinary creative</p>
-          <h1 id="hero-title">Hi, I’m Anum<br><span class="gradient-text">Mumtaz.</span></h1>
-          <p class="hero-role-line">CEO of <span class="text-highlight">Stellax Agency</span> · Creative director &amp; maker</p>
-          <p class="hero-description">I bring ideas to life through expressive 2D character design and illustration, 2D animation and motion graphics, distinctive branding, and video editing.</p>
-          <div class="hero-actions">
-            <a class="button button-primary" href="#portfolio">Explore work <span aria-hidden="true">↗</span></a>
-            <a class="button button-secondary" href="cv.pdf" download="Anum-Mumtaz-CV.pdf">Download CV <span aria-hidden="true">↓</span></a>
-          </div>
-          <div class="hero-specialties" aria-label="Creative disciplines">
-            <span>Graphic design</span><span>2D animation</span><span>Character art</span><span>Video content</span>
-          </div>
-        </div>
-        <div class="hero-visual reveal" aria-label="Abstract neon artwork representing a creative portrait">
-          <div class="orbit orbit-one"></div>
-          <div class="orbit orbit-two"></div>
-          <div class="portrait-card">
-            <div class="portrait-shape portrait-shape-back"></div>
-            <div class="portrait-shape portrait-shape-front"></div>
-            <div class="portrait-spark spark-one">✳</div>
-            <div class="portrait-spark spark-two">✦</div>
-            <div class="portrait-caption"><span>CREATIVE MIND</span><strong>Always in<br>the making.</strong></div>
-          </div>
-          <div class="floating-label floating-label-top"><span class="label-icon">✳</span> Design with a pulse</div>
-          <div class="floating-label floating-label-bottom"><span class="label-icon cyan">↗</span> Stories in motion</div>
-          <span class="hero-index">01 — 04</span>
-        </div>
+    <section id="hero" class="hero section-shell" aria-labelledby="hero-title">
+      <div class="hero-top reveal">
+        <h1 class="hero-title" id="hero-title">
+          Hi, I'm <span class="gradient-text">Anum Mumtaz</span>
+        </h1>
       </div>
-      <a class="scroll-cue" href="#about"><span></span> Scroll to explore</a>
+      <div class="hero-image-wrapper reveal">
+        <span class="bg-name-text" aria-hidden="true">ANUM MUMTAZ</span>
+        <img src="Image/Anum Mumtaz.jpeg" alt="Anum Mumtaz" class="hero-profile-img">
+      </div>
+      <div class="hero-bottom reveal">
+        <p class="hero-description">CEO at Stellax Agency · Creative Director &amp; Maker</p>
+      </div>
     </section>
 
     <section class="section section-about" id="about" aria-labelledby="about-title">
@@ -184,7 +183,6 @@
         <div class="experience-intro reveal">
           <p class="eyebrow">The path so far</p><h2 id="experience-title">Good work comes<br>from <span class="gradient-text">good thinking.</span></h2>
           <p>Creative leadership, thoughtful collaboration, and an eye for detail shape the way I approach every brief.</p>
-          <div class="experience-actions"><button class="button button-primary" type="button" data-open-cv>Preview CV <span aria-hidden="true">↗</span></button><a class="button button-secondary" href="cv.pdf" download="Anum-Mumtaz-CV.pdf">Download PDF <span aria-hidden="true">↓</span></a></div>
         </div>
         <div class="timeline reveal">
           <article class="timeline-item"><span class="timeline-marker"></span><div class="timeline-top"><span>Creative leadership</span><span>Present</span></div><h3>CEO · Stellax Agency</h3><p>Leading a creative agency focused on bringing ideas to life through thoughtful visual storytelling.</p></article>
@@ -215,22 +213,23 @@
     </section>
   </main>
 
-  <footer class="site-footer"><div class="container footer-inner"><a class="brand footer-brand" href="#top"><span class="brand-mark">A<span>.</span></span><span class="brand-name">ANUM MUMTAZ<span>CEO · STELLAX AGENCY</span></span></a><p>Made with intention <span aria-hidden="true">✳</span> © <span id="current-year"></span> Anum Mumtaz</p><a class="back-to-top" href="#top">Back to top ↑</a></div></footer>
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <a class="brand footer-brand" href="#top">
+        <span class="brand-mark">A</span>
+        <span class="brand-name">ANUM MUMTAZ<span>CEO · STELLAX AGENCY</span></span>
+      </a>
+      <p>Made with intention <span aria-hidden="true">✳</span> © <span id="current-year"></span> Anum Mumtaz</p>
+      <a class="back-to-top" href="#top">Back to top ↑</a>
+    </div>
+  </footer>
 
+  <!-- Portfolio Project Modal Only (No CV Modal) -->
   <dialog class="site-modal" id="portfolio-modal" aria-labelledby="modal-title">
     <div class="modal-shell">
       <button class="modal-close" type="button" aria-label="Close dialog">×</button>
       <div class="modal-media" id="modal-media"></div>
       <div class="modal-copy"><p class="eyebrow" id="modal-kicker">Selected work</p><h2 id="modal-title"></h2><p id="modal-description"></p><a class="button button-primary modal-project-link" id="modal-project-link" href="https://www.behance.net/Anum-Mumtaz-Graphic" target="_blank" rel="noopener noreferrer">Explore on Behance <span aria-hidden="true">↗</span></a></div>
-    </div>
-  </dialog>
-
-  <dialog class="site-modal cv-modal" id="cv-modal" aria-labelledby="cv-name">
-    <div class="modal-shell cv-shell">
-      <button class="modal-close" type="button" aria-label="Close dialog">×</button>
-      <h2 class="visually-hidden" id="cv-name">Anum Mumtaz CV preview</h2>
-      <iframe class="cv-preview" src="cv.pdf#view=FitH" title="Anum Mumtaz CV PDF preview"></iframe>
-      <div class="cv-print-action"><a class="button button-primary" href="cv.pdf" download="Anum-Mumtaz-CV.pdf">Download CV <span aria-hidden="true">↓</span></a></div>
     </div>
   </dialog>
   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>

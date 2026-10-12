@@ -4,6 +4,7 @@
 
   const applyTheme = (theme, persist = false) => {
     const selectedTheme = theme === "light" ? "light" : "dark";
+    document.body.classList.toggle("light-theme", selectedTheme === "light");
     document.body.dataset.theme = selectedTheme;
     if (themeToggle instanceof HTMLButtonElement) {
       const isLight = selectedTheme === "light";
@@ -61,6 +62,28 @@
         closeNavigation();
       }
     });
+  }
+
+  const observedSections = document.querySelectorAll("main section[id]");
+  const sectionNavLinks = navLinks?.querySelectorAll('a[href^="#"]') ?? [];
+  if ("IntersectionObserver" in window && observedSections.length > 0 && sectionNavLinks.length > 0) {
+    const sectionObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        const sectionHref = `#${entry.target.id}`;
+        sectionNavLinks.forEach((link) => {
+          const isCurrent = link.getAttribute("href") === sectionHref;
+          link.classList.toggle("active", isCurrent);
+          if (isCurrent) {
+            link.setAttribute("aria-current", "location");
+          } else {
+            link.removeAttribute("aria-current");
+          }
+        });
+      });
+    }, { rootMargin: "-30% 0px -60% 0px", threshold: 0 });
+
+    observedSections.forEach((section) => sectionObserver.observe(section));
   }
 
   const year = document.querySelector("#current-year");
