@@ -135,4 +135,166 @@
   } else {
     counters.forEach(animateCounter);
   }
+
+  const createCategoryItems = (folder, filenames) => filenames.map((filename) => ({
+    title: filename.replace(/\.[^.]+$/, ""),
+    src: `Project/${folder}/${filename}`.split("/").map(encodeURIComponent).join("/")
+  }));
+
+  const categoryGalleryData = {
+    "2d-character": createCategoryItems("2D Character", [
+      "Dongfang and orchid.jpg",
+      "Venom.JPG",
+      "W-Auranzaib.jpg"
+    ]),
+    "ai-work": createCategoryItems("AI work", [
+      "Model 1.mp4",
+      "Model 2.mp4",
+      "Model 3.mp4",
+      "Model 4.mp4",
+      "Model 5.mp4",
+      "Model 6.mp4",
+      "Model 7.mp4",
+      "Post 1.jpeg",
+      "Post 2.jpeg",
+      "Post 3.jpeg",
+      "Post 4.jpeg",
+      "Post 5.jpeg",
+      "Post 6.jpeg",
+      "Post 7.jpeg",
+      "Post 8.jpeg"
+    ]),
+    "2d-animation": createCategoryItems("Animation", [
+      "Agg Lagy Is Mohabbat Ko.mp4",
+      "Revange of Cangyang Sea Clip.mp4"
+    ]),
+    "branding": createCategoryItems("Branding", [
+      "Business_Card_Mockup_4.jpg",
+      "Envelope-Mockups-3.jpg"
+    ]),
+    "logo-designing": createCategoryItems("Logo designing", [
+      "Cascadia Logo Mockup.png",
+      "Cascadia Logo.jpg",
+      "Khushbu Logo Mockup.png",
+      "Khushbu Logo.png",
+      "Kohinoor Logo Mockup 1.png",
+      "Kohinoor Logo Mockup 2.png",
+      "Kohinoor Logo Mockup 3.png",
+      "Kohinoor Logo.jpg",
+      "Modern Pets N Pet mock up.png",
+      "Nailvana Logo Mockup 1.png",
+      "Naivana Logo Mockup 2.png",
+      "Pets n Pet Logo.JPG",
+      "Quiz Rush Logo Mockup 1.jpeg",
+      "Quiz Rush Logo.png"
+    ]),
+    "manipulation": createCategoryItems("Manipulation", [
+      "Manipulation Post 1.jpg"
+    ]),
+    "motion-graphics": createCategoryItems("Motion Graphics", [
+      "Boba Coffee Poster Motion Graphic.mp4",
+      "Chocolate Ad.mp4",
+      "Final Fibroid.mp4",
+      "Fizi.mp4",
+      "Ketchup Add.mp4",
+      "Pickle.mp4"
+    ]),
+    "social-media-post": createCategoryItems("Social Media Post", [
+      "Explore Pakistan 1.jpg",
+      "Explore Pakistan 2.jpg",
+      "Explore Pakistan 3.jpg",
+      "Explore Pakistan 4.jpg",
+      "Explore Pakistan 5.jpg",
+      "Hiring sales representative.jpg",
+      "Magazine with Flowers Mockup.jpg",
+      "Need A Designer.jpg",
+      "Need A Growth Hacker.jpg",
+      "Social Media Post 1.jpg",
+      "Social Media Post 2.jpg",
+      "Social Media Post 3.jpg"
+    ]),
+    "video-editing": createCategoryItems("Video Editing", [
+      "Hacathone.mp4",
+      "Lesson 1 Flat Illutration.mp4",
+      "Lesson 2 Flat Illutration.mp4",
+      "Lesson 3 Flat Illutration.mp4",
+      "SAP.mp4"
+    ])
+  };
+
+  const galleryModal = document.querySelector("#portfolio-gallery-modal");
+  const categoryTitle = document.querySelector("#modal-category-title");
+  const categorySubtitle = document.querySelector("#modal-category-subtitle");
+  const categoryCount = document.querySelector("#modal-category-count");
+  const galleryGrid = document.querySelector("#modal-gallery-grid");
+
+  const renderGalleryMedia = (item, index) => {
+    const videoExtension = item.src.match(/\.(mp4|webm|mov)$/i)?.[1]?.toLowerCase();
+    const videoTypes = {
+      mp4: "video/mp4",
+      webm: "video/webm",
+      mov: "video/quicktime"
+    };
+    const isVideo = Boolean(videoExtension);
+    const mediaMarkup = isVideo
+      ? `<video controls playsinline preload="metadata" width="100%" aria-label="${item.title}" style="width:100%; aspect-ratio:16/9; background:#000;"><source src="${item.src}" type="${videoTypes[videoExtension]}">Your browser does not support the video tag.</video>`
+      : `<img src="${item.src}" alt="${item.title}" loading="lazy" decoding="async">`;
+
+    return `
+      <article class="gallery-item">
+        <div class="gallery-media"${isVideo ? ' style="aspect-ratio:16/9"' : ""}>${mediaMarkup}</div>
+        <div class="gallery-item-info">
+          <span class="project-num">#${index + 1}</span>
+          <p>${item.title}</p>
+        </div>
+      </article>
+    `;
+  };
+
+  const openCategoryGallery = (category) => {
+    if (!(galleryModal instanceof HTMLDialogElement) || !galleryGrid || !categoryTitle || !categoryCount || !categorySubtitle) return;
+
+    const categoryItems = categoryGalleryData[category];
+    if (!categoryItems || !categoryItems.length) return;
+
+    const heading = document.querySelector(`.portfolio-card[data-category="${category}"] h3`)?.textContent || "Category Projects";
+    categoryTitle.textContent = heading;
+    categorySubtitle.textContent = "Explore all projects in this category";
+    categoryCount.textContent = `Showing all ${categoryItems.length} media items`;
+    galleryGrid.innerHTML = categoryItems.map(renderGalleryMedia).join("");
+    galleryModal.showModal();
+  };
+
+  document.querySelectorAll(".portfolio-card").forEach((card) => {
+    const category = card.dataset.category;
+    if (!category) return;
+
+    card.addEventListener("click", (event) => {
+      if (event.target instanceof Element && event.target.closest("button, a, video")) return;
+      openCategoryGallery(category);
+    });
+
+    card.addEventListener("keydown", (event) => {
+      if ((event.key === "Enter" || event.key === " ") && document.activeElement === card) {
+        event.preventDefault();
+        openCategoryGallery(category);
+      }
+    });
+  });
+
+  document.querySelectorAll(".open-gallery-btn").forEach((button) => {
+    button.addEventListener("click", (event) => {
+      event.stopPropagation();
+      const category = button.dataset.category;
+      if (category) openCategoryGallery(category);
+    });
+  });
+
+  galleryModal?.querySelector(".modal-close")?.addEventListener("click", () => {
+    galleryModal.close();
+  });
+
+  galleryModal?.addEventListener("click", (event) => {
+    if (event.target === galleryModal) galleryModal.close();
+  });
 })();

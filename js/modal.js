@@ -1,5 +1,110 @@
 (() => {
   const portfolioModal = document.querySelector("#portfolio-modal");
+  const galleryModal = document.querySelector("#portfolio-gallery-modal");
+
+  const categoryGalleryData = {
+    "2d-character": [
+      { title: "2D Character - Concept Art 1", src: "Project/2D Character/Dongfang and orchid.jpg" },
+      { title: "2D Character - Character Sheet 2", src: "Project/2D Character/W-Auranzaib.jpg" }
+    ],
+    "ai-work": [
+      { title: "AI Visual Art 1", src: "Project/AI work/Post 1.jpeg" },
+      { title: "AI Visual Art 2", src: "Project/AI work/Post 2.jpeg" },
+      { title: "AI Visual Art 3", src: "Project/AI work/Post 3.jpeg" },
+      { title: "AI Visual Art 4", src: "Project/AI work/Post 4.jpeg" },
+      { title: "AI Visual Art 5", src: "Project/AI work/Post 5.jpeg" },
+      { title: "AI Visual Art 6", src: "Project/AI work/Post 6.jpeg" },
+      { title: "AI Visual Art 7", src: "Project/AI work/Post 7.jpeg" },
+      { title: "AI Visual Art 8", src: "Project/AI work/Post 8.jpeg" }
+    ],
+    "2d-animation": [
+      { title: "2D Animation Reel 1", src: "Project/Animation/Agg Lagy Is Mohabbat Ko.mp4" },
+      { title: "2D Animation Scene 2", src: "Project/Animation/Revange of Cangyang Sea Clip.mp4" }
+    ],
+    "branding": [
+      { title: "Brand Identity Guide 1", src: "Project/Branding/Business_Card_Mockup_4.jpg" },
+      { title: "Brand Identity Guide 2", src: "Project/Branding/Nailvana Bag.jpg" },
+      { title: "Brand Identity Guide 3", src: "Project/Branding/Logo.jpg" }
+    ],
+    "logo-designing": [
+      { title: "Logo Design 1", src: "Project/Logo designing/Cascadia Logo Mockup.png" },
+      { title: "Logo Design 2", src: "Project/Logo designing/Khushbu Logo Mockup.png" },
+      { title: "Logo Design 3", src: "Project/Logo designing/Quiz Rush Logo.png" }
+    ],
+    "manipulation": [
+      { title: "Photo Manipulation 1", src: "Project/Manipulation/Manipulation Post 1.jpg" }
+    ],
+    "motion-graphics": [
+      { title: "Motion Graphics Work 1", src: "Project/Motion Graphics/Boba Coffee Poster Motion Graphic.mp4" },
+      { title: "Motion Graphics Work 2", src: "Project/Motion Graphics/Chocolate Ad.mp4" }
+    ],
+    "social-media-post": [
+      { title: "Social Media Creative 1", src: "Project/Social Media Post/Explore Pakistan 1.jpg" },
+      { title: "Social Media Creative 2", src: "Project/Social Media Post/Hiring sales representative.jpg" },
+      { title: "Social Media Creative 3", src: "Project/Social Media Post/Need A Designer.jpg" }
+    ],
+    "video-editing": [
+      { title: "Video Edit Showreel 1", src: "Project/Video Editing/Hacathone.mp4" },
+      { title: "Video Edit Showreel 2", src: "Project/Video Editing/Lesson 1 Flat Illutration.mp4" }
+    ]
+  };
+
+  const renderGalleryItems = (category, data) => {
+    const modalTitle = document.querySelector("#modal-category-title");
+    const modalSubtitle = document.querySelector("#modal-category-subtitle");
+    const modalCount = document.querySelector("#modal-category-count");
+    const galleryGrid = document.querySelector("#modal-gallery-grid");
+
+    if (!galleryGrid || !modalTitle || !modalSubtitle || !modalCount) return;
+
+    const cardTitle = document.querySelector(`.portfolio-card[data-category="${category}"] h3`)?.textContent || "Category Work";
+    modalTitle.textContent = cardTitle;
+    modalSubtitle.textContent = "Explore all projects in this category";
+    modalCount.textContent = `Showing all ${data.length} projects`;
+
+    galleryGrid.innerHTML = data.map((item, index) => {
+      const isVideo = item.src.toLowerCase().endsWith(".mp4");
+      const mediaMarkup = isVideo
+        ? `<video src="${item.src}" controls playsinline preload="metadata" aria-label="${item.title}"></video>`
+        : `<img src="${item.src}" alt="${item.title}" loading="lazy" />`;
+
+      return `
+        <div class="gallery-item">
+          <div class="gallery-img-wrapper">
+            ${mediaMarkup}
+          </div>
+          <div class="gallery-item-info">
+            <span class="project-num">#${index + 1}</span>
+            <p>${item.title}</p>
+          </div>
+        </div>
+      `;
+    }).join("");
+  };
+
+  const openGalleryModal = (category) => {
+    if (!(galleryModal instanceof HTMLDialogElement)) return;
+    const data = categoryGalleryData[category];
+    if (!data || !data.length) return;
+    renderGalleryItems(category, data);
+    galleryModal.showModal();
+  };
+
+  galleryModal?.querySelector(".modal-close")?.addEventListener("click", () => {
+    galleryModal.close();
+  });
+
+  galleryModal?.addEventListener("click", (event) => {
+    if (event.target === galleryModal) galleryModal.close();
+  });
+
+  document.querySelectorAll(".open-gallery-btn").forEach((button) => {
+    button.addEventListener("click", (event) => {
+      event.stopPropagation();
+      const category = button.dataset.category;
+      if (category) openGalleryModal(category);
+    });
+  });
 
   if (!(portfolioModal instanceof HTMLDialogElement)) return;
 
@@ -65,13 +170,13 @@
         image.alt = `${title} project preview`;
         let currentImage = 0;
 
+        const counter = document.createElement("span");
+        counter.className = "gallery-count";
         const renderImage = () => {
           image.src = imageUrls[currentImage];
           image.alt = `${title} project preview ${currentImage + 1} of ${imageUrls.length}`;
           counter.textContent = `${currentImage + 1} / ${imageUrls.length}`;
         };
-        const counter = document.createElement("span");
-        counter.className = "gallery-count";
         if (imageUrls.length > 1) {
           const controls = document.createElement("div");
           controls.className = "gallery-controls";
@@ -114,5 +219,4 @@
       if (event.target === dialog && dialog instanceof HTMLDialogElement) dialog.close();
     });
   });
-
 })();
